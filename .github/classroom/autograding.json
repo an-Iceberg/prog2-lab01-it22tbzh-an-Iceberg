@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Run PA unit tests",
+      "setup": "",
+      "run": "gradle :Mandelbrot:test --no-daemon --info",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    }
+  ]
+}
