@@ -8,7 +8,7 @@ public class PrimeChecker
 
   public static void main(String[] args)
   {
-    long starttime = System.currentTimeMillis();
+    long start_time = System.currentTimeMillis();
     long duration;
 
     try
@@ -21,7 +21,7 @@ public class PrimeChecker
     }
     finally
     {
-      duration = System.currentTimeMillis() - starttime;
+      duration = System.currentTimeMillis() - start_time;
     }
 
     System.out.println("Finished in " + duration + " ms");
