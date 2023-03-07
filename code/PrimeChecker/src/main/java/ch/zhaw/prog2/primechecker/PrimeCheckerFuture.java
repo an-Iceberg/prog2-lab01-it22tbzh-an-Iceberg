@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+import ch.zhaw.prog2.primechecker.PrimeTaskCallable.Result;
+
 public class PrimeCheckerFuture
 {
   private static final long LOWER_LIMIT = 10000L;
@@ -34,15 +36,28 @@ public class PrimeCheckerFuture
   private static void checkPrimes(int numPrimes) throws InterruptedException
   {
     // TODO: create ExecutorService
+    ExecutorService primes = Executors.newSingleThreadExecutor();
+
+    ArrayList<Future<Result>> primeResults = new ArrayList<>();
 
     // TODO: submit tasks to ExecutorService and collect the returned Futures in a List
     for (int i = 0; i < numPrimes; i++)
     {
-
+      primeResults.add(primes.submit(new PrimeTaskCallable(nextRandom())));
     }
     // TODO: Loop through List, wait for completion and print results
+    for (Future<Result> prime : primeResults) {
+      try {
+        Result result = prime.get();
+        System.out.printf("Number:%9d\t%s%n", result.candidate, ( result.isPrime ? "Prime" : String.format("Factor:%5d", result.factor)));
+      } catch (ExecutionException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    }
 
     // TODO: stop ExecutorService
+    primes.shutdown();
 
     // TODO: await termination with timeout 1 minute
 

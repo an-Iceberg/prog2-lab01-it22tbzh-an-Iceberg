@@ -1,5 +1,7 @@
 package ch.zhaw.prog2.primechecker;
 
+import java.sql.Time;
+
 public class PrimeChecker
 {
   private static final long LOWER_LIMIT = 10000L;
@@ -17,21 +19,23 @@ public class PrimeChecker
     }
     catch (InterruptedException e)
     {
-      System.out.println("Interrupted - " + e.getMessage());
+      System.out.printf("Interrupted - %s%n", e.getMessage());
     }
     finally
     {
       duration = System.currentTimeMillis() - start_time;
     }
 
-    System.out.println("Finished in " + duration + " ms");
+    System.out.printf("Finished in %d ms", duration);
   }
 
   private static void checkPrimes(int numPrimes) throws InterruptedException
   {
     for (int i = 0; i < numPrimes; i++)
     {
-      new PrimeTask(nextRandom()).run(); // runs sequential in current thread
+      //new PrimeTask(nextRandom()).run(); // runs sequential in current thread
+      Thread thread = new Thread(new PrimeTask(nextRandom()));
+      thread.start();
     }
   }
 

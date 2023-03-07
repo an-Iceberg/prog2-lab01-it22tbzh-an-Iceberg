@@ -10,6 +10,8 @@ public class PrimeCheckerExecutor
   private static final long UPPER_LIMIT = 1000000000L;
   private static final int NUM_PRIME = 500;
 
+  private static final ExecutorService primeService = Executors.newFixedThreadPool(20);
+
   public static void main(String[] args)
   {
     long starttime = System.currentTimeMillis();
@@ -21,28 +23,30 @@ public class PrimeCheckerExecutor
     }
     catch (InterruptedException e)
     {
-      System.out.println("Interrupted - " + e.getMessage());
+      System.out.printf("Interrupted - %s%n", e.getMessage());
     }
     finally
     {
       duration = System.currentTimeMillis() - starttime;
     }
 
-    System.out.println("Finished in " + duration + " ms");
+    System.out.printf("Finished in %d ms%n", duration);
   }
 
   private static void checkPrimes(int numPrimes) throws InterruptedException
   {
-      // TODO: create ExecutorService - What ThreadPool-Type/-Size fits best?
+    // TODO: create ExecutorService - What ThreadPool-Type/-Size fits best?
 
-      for (int i = 0; i < numPrimes; i++)
-      {
-        // TODO: execute the runnable using the executor service
+    for (int i = 0; i < numPrimes; i++)
+    {
+      // TODO: execute the runnable using the executor service
+      primeService.execute(new PrimeTask(nextRandom()));
+    }
+    // stop ExecutorService
+    primeService.shutdown();
 
-      }
-      // stop ExecutorService
-
-      // wait for termination with timeout of 1 minute
+    // wait for termination with timeout of 1 minute
+    primeService.awaitTermination(1, TimeUnit.MINUTES);
   }
 
   private static long nextRandom()

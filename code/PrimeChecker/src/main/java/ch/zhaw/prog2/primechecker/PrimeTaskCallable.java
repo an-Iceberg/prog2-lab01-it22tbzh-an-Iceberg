@@ -13,7 +13,12 @@ public class PrimeTaskCallable implements Callable<PrimeTaskCallable.Result>
 
   public Result call()
   {
-    return null;
+    return new Result(this.getPrimeCandidate(), findSmallestFactor(this.primeCandidate));
+  }
+
+  public long getPrimeCandidate()
+  {
+    return primeCandidate;
   }
 
   /**
