@@ -33,9 +33,9 @@ public class PrimeChecker
   {
     for (int i = 0; i < numPrimes; i++)
     {
-      //new PrimeTask(nextRandom()).run(); // runs sequential in current thread
-      Thread thread = new Thread(new PrimeTask(nextRandom()));
-      thread.start();
+      new PrimeTask(nextRandom()).run(); // runs sequential in current thread
+      //Thread thread = new Thread(new PrimeTask(nextRandom()));
+      //thread.start();
     }
   }
 

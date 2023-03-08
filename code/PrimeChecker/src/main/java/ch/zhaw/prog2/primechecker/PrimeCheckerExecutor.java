@@ -10,7 +10,7 @@ public class PrimeCheckerExecutor
   private static final long UPPER_LIMIT = 1000000000L;
   private static final int NUM_PRIME = 500;
 
-  private static final ExecutorService primeService = Executors.newFixedThreadPool(20);
+  private static final ExecutorService primeService = Executors.newFixedThreadPool(5);
 
   public static void main(String[] args)
   {

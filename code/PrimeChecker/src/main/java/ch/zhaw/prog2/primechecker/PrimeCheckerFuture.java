@@ -12,6 +12,8 @@ public class PrimeCheckerFuture
   private static final long UPPER_LIMIT = 1000000000L;
   private static final int NUM_PRIME = 500;
 
+  static ExecutorService primes = Executors.newSingleThreadExecutor();
+
   public static void main(String[] args)
   {
     long starttime = System.currentTimeMillis();
@@ -36,7 +38,6 @@ public class PrimeCheckerFuture
   private static void checkPrimes(int numPrimes) throws InterruptedException
   {
     // TODO: create ExecutorService
-    ExecutorService primes = Executors.newSingleThreadExecutor();
 
     ArrayList<Future<Result>> primeResults = new ArrayList<>();
 

@@ -27,20 +27,31 @@ public class PrimeTaskCallable implements Callable<PrimeTaskCallable.Result>
    * @param primeCandidate Number to check if it is a
    * @return 0 if prime number, smallest factor otherwise
    */
-  private long findSmallestFactor(long primeCandidate)
+  private long findSmallestFactor(long n)
   {
-    if (primeCandidate>3)
+    if (n == 2 || n % 2 == 0)
     {
-      for(long factor = 2; factor <= primeCandidate/2; ++factor)
+      return 2;
+    }
+
+    if (n == 3 || n % 3 == 0)
+    {
+      return 3;
+    }
+
+    for (int factor = 5; factor * factor <= n; factor += 6)
+    {
+      if (n % factor == 0)
       {
-        if ( primeCandidate / factor * factor == primeCandidate)
-        {
-          return factor; // found a factor -> is no prime
-        }
+        return factor;
+      }
+
+      if (n % (factor + 2) == 0) {
+        return factor + 2;
       }
     }
 
-    return 0; // is prime number
+    return 0;
   }
 
   /**
