@@ -15,13 +15,13 @@ import javafx.application.Application;
  * at lower priority, which will make sure that the GUI thread will get a
  * chance to run to repaint the display as necessary.
  */
-public class Mandelbrot {
-
-    /**
-     * This Wrapper Class is only required to allow IDEs to start the FX-Applications
-     */
-    public static void main(String[] args) {
-        Application.launch(MandelbrotGui.class, args);
-    }
-
+public class Mandelbrot
+{
+  /**
+   * This Wrapper Class is only required to allow IDEs to start the FX-Applications
+   */
+  public static void main(String[] args)
+  {
+    Application.launch(MandelbrotGui.class, args);
+  }
 } // end Mandelbrot
